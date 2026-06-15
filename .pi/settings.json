@@ -1,0 +1,11 @@
+{
+  "skills": {
+    "enabled": true,
+    "includeSkills": ["bumblebee-voice"]
+  },
+  "enableSkillCommands": true,
+  "metadata": {
+    "project": "bumblebee",
+    "description": "Speak Through Song — lyric search, audio snippets, and Bumblebee voice"
+  }
+}
