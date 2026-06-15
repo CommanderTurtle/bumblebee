@@ -101,51 +101,58 @@ User's Disorganized MP3s
 
 ## Project Structure
 
-```
+```plain
 bumblebee/
-|                                   # AGPLv3
-|                                   # Technical specification (see for implementation details)
-|                                   # This file
-|
-+-- bumblebee-bootstrap/            # PART 1: Library Bootstrap
-|   |                               # uv project config
-|   |                               # Generated Jellyfin config
-|   +-- bootstrap/                  # Python package
-|       |                           # CLI entry + main pipeline (7 stages)
-|       |                           # TrackInfo, LibraryConfig dataclasses
-|       |                           # AcoustID/Chromaprint 3-tier fallback
-|       |                           # MusicBrainz + ID3 tag operations
-|       |                           # lrclib.net API client
-|       |                           # Artist/Album/ restructuring
-|       |                           # Docker Compose + plugin setup
-|       |                           # Rich progress UI
-|       |                           # File discovery, sanitization
-|
-+-- bumblebee/                      # PART 2: Engine
-    |                               # uv project config
-    +-- bumblebee/                  # Python package
-    |   |                           # Version
-    |   |                           # python -m bumblebee entry
-    |   |                           # argparse + TUI launcher
-    |   |                           # LyricLine, Song, Match dataclasses
-    |   |                           # .lrc file parser (timestamps)
-    |   |                           # SQLite FTS5 search index
-    |   |                           # FTS -> fuzzy -> word fallback
-    |   |                           # pydub: play, slice, export, crossfade
-    |   |                           # Rich interactive terminal UI
-    |   |                           # FastAPI REST backend
-    |
-    +-- web/                        # React Web UI
-        |                           # npm dependencies
-        |                           # Vite build config
-        |                           # Tailwind CSS config
-        |                           # Pre-built production bundle
-        +-- src/
-            |                       # Router + layout
-            |                       # API client + mock data
-            |                       # TypeScript interfaces
-            +-- components/         # 10 React components
-            +-- hooks/              # 3 custom hooks
+├── SPEC.md                          # Full technical specification
+├── README.md                        # Comprehensive documentation
+│
+├── bumblebee-bootstrap/             # PART 1: Library Bootstrap
+│   ├── pyproject.toml
+│   └── bootstrap/
+│       ├── __init__.py              # Main CLI orchestration
+│       ├── models.py                # TrackInfo, LibraryConfig
+│       ├── fingerprint.py           # AcoustID + 3-tier fallback
+│       ├── metadata.py              # MusicBrainz + ID3 operations
+│       ├── lyrics.py                # lrclib.net API client
+│       ├── organize.py              # Artist/Album/ restructuring
+│       ├── jellyfin.py              # Docker Compose + plugin
+│       ├── console.py               # Rich progress UI
+│       └── utils.py                 # File discovery, sanitization
+│
+└── bumblebee/                       # PART 2: Bumblebee Engine
+    ├── pyproject.toml
+    ├── bumblebee/
+    │   ├── __init__.py
+    │   ├── __main__.py
+    │   ├── cli.py                   # argparse + TUI launcher
+    │   ├── models.py                # LyricLine, Song, Match
+    │   ├── lrc_parser.py            # LRC file parser
+    │   ├── db.py                    # SQLite FTS5 search index
+    │   ├── search.py                # FTS → fuzzy → word fallback
+    │   ├── audio.py                 # pydub: slice, play, export
+    │   ├── tui.py                   # Rich interactive terminal
+    │   └── web_api.py               # FastAPI REST backend
+    └── web/                         # REACT WEB UI
+        ├── dist/                    # Built & deployed
+        └── src/
+            ├── App.tsx              # Router + layout
+            ├── api.ts               # API + mock data
+            ├── types.ts
+            ├── components/          # 10 full components
+            │   ├── Navbar.tsx
+            │   ├── SearchBar.tsx
+            │   ├── ResultsList.tsx
+            │   ├── MatchCard.tsx
+            │   ├── LyricViewer.tsx  # Click/shift-click selection
+            │   ├── AudioPlayer.tsx
+            │   ├── WaveformVisualizer.tsx
+            │   ├── SnippetExporter.tsx
+            │   ├── ExportPanel.tsx
+            │   └── ChainBuilder.tsx
+            └── hooks/               # 3 custom hooks
+                ├── useAudio.ts
+                ├── useSearch.ts
+                └── useSnippet.ts
 ```
 
 For detailed technical specifications -- including exact module signatures, database schemas, API request/response shapes, and the full component inventory -- see [`SPEC.md`](SPEC.md).
