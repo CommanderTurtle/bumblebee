@@ -84,7 +84,3 @@ module uses a three-tier fallback:
 3. Fall back to metadata-based identification using existing ID3 tags
 
 This ensures the bootstrapper works well even without Chromaprint installed.
-
-## License
-
-MIT
