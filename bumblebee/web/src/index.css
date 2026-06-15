@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .lyric-line {
+    @apply py-1.5 px-3 rounded cursor-pointer transition-colors hover:bg-slate-100;
+  }
+  .lyric-line.matched {
+    @apply bg-amber-100 text-amber-900 font-medium;
+  }
+  .lyric-line.selected {
+    @apply bg-amber-200 text-amber-900;
+  }
+  .lyric-line.current {
+    @apply bg-slate-200 text-slate-900 font-medium;
+  }
+}

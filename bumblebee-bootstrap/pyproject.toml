@@ -1,0 +1,14 @@
+[project]
+name = "bumblebee-bootstrap"
+version = "1.0.0"
+description = "Automated Jellyfin library bootstrapper for disorganized MP3 collections"
+requires-python = ">=3.10"
+dependencies = [
+    "mutagen>=1.47",
+    "requests>=2.31",
+    "rich>=13.0",
+    "pillow>=10.0",
+]
+
+[project.scripts]
+bumblebee-bootstrap = "bootstrap:main"
